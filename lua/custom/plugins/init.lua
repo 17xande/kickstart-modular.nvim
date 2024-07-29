@@ -3,7 +3,4 @@
 --
 -- See the kickstart.nvim README for more information
 
-vim.opt_local.tabstop = 4
-vim.opt_local.shiftwidth = 4
-
 return {}
