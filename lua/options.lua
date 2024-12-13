@@ -62,4 +62,21 @@ vim.opt.scrolloff = 10
 vim.opt.shiftwidth = 2
 vim.opt.tabstop = 2
 
+if vim.fn.has 'wsl' then
+  vim.g.clipboard = {
+    name = 'WslClipboard',
+    copy = {
+      ['+'] = 'clip.exe',
+      ['*'] = 'clip.exe',
+    },
+    paste = {
+      ['+'] = 'powershell.exe -NoLogo -NoProfile -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+      ['*'] = 'powershell.exe -NoLogo -NoProfile -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+    },
+    cache_enabled = 0,
+  }
+
+  vim.keymap.set({ 'n', 'v' }, 'y', '"+y', { noremap = true, silent = true })
+  vim.keymap.set({ 'n', 'v' }, 'p', '"+p', { noremap = true, silent = true })
+end
 -- vim: ts=2 sts=2 sw=2 et
